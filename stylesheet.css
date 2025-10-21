@@ -1,6 +1,6 @@
 
 body {
-  background-image: url("background.webp");
+  background-image: ("background.webp");
   background-repeat: no-repeat;
 background-size: cover;
 }
