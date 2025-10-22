@@ -2,101 +2,120 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Minecraft Skin Finder — Pink & Green</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minecraft skin quiz</title>
   <style>
-    :root{
-      --pink-500:#ff6fb1;
-      --pink-700:#ff4fa8;
-      --green-500:#2bc06b;
-      --green-700:#1f8c58;
-      --card-bg:linear-gradient(180deg,rgba(255,255,255,0.98),rgba(255,250,255,0.98));
-      --muted:#333;
+    html, body { height: 100%; margin: 0; font-family: Arial, sans-serif; }
+    body {
+      background-image: url('images/Screenshot-2025-10-21-153029.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #222;
     }
-    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;background:
-      linear-gradient(180deg,rgba(43,192,107,0.03),rgba(255,111,177,0.02));display:flex;align-items:center;justify-content:center;padding:20px;color:var(--muted)}
-    .card{width:100%;max-width:920px;background:var(--card-bg);border-radius:14px;padding:22px;box-shadow:0 14px 40px rgba(31,140,88,0.06);border:2px solid rgba(255,79,168,0.06)}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
-    h1{margin:0;font-size:20px;color:var(--green-700);letter-spacing:0.6px}
-    .pill{background:linear-gradient(90deg,var(--green-500),var(--pink-500));color:#fff;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
-    p.lead{margin:10px 0 18px;color:#444}
-    form .q{margin-bottom:12px;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(43,192,107,0.02), rgba(255,111,177,0.02));border:1px solid rgba(0,0,0,0.03)}
-    legend{font-weight:800;color:var(--pink-700);margin-bottom:8px}
-    .opts{display:flex;flex-wrap:wrap;gap:10px}
-    label.opt{background:#fff;padding:9px 12px;border-radius:10px;border:1px solid rgba(0,0,0,0.04);cursor:pointer;font-size:14px;color:#222;display:flex;align-items:center}
-    label.opt input{margin-right:8px}
-    .controls{display:flex;gap:10px;align-items:center;margin-top:6px}
-    .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:800;color:#fff}
-    .btn-primary{background:linear-gradient(90deg,var(--green-500),var(--green-700))}
-    .btn-accent{background:linear-gradient(90deg,var(--pink-500),var(--pink-700))}
-    .result{margin-top:16px;padding:14px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.98),#fff);border:1px solid rgba(43,192,107,0.06)}
-    .result h2{margin:0 0 8px;color:var(--pink-700)}
-    .result p{margin:6px 0;color:#333;line-height:1.45}
-    .meta{font-size:13px;color:#666;margin-top:8px}
-    @media (max-width:640px){.opts{flex-direction:column}}
+    .card {
+      width: 100%;
+      max-width: 760px;
+      background: rgba(255,255,255,0.92);
+      border: 2px solid #e7e7e7;
+      padding: 18px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    h1 {
+      text-align: center;
+      text-transform: uppercase;
+      color: #2bb673; /* green */
+      margin: 0 0 10px;
+    }
+    p.lead {
+      text-align: center;
+      margin: 0 0 16px;
+      color: #444;
+    }
+    fieldset { border: 0; margin: 10px 0; padding: 0; }
+    legend { font-weight: 700; color: #ff4fa8; margin-bottom: 8px; } /* pink */
+    .opts { display:flex; gap:8px; flex-wrap:wrap; }
+    label.opt {
+      background:#fff;
+      padding:8px 10px;
+      border-radius:8px;
+      border:1px solid #eee;
+      cursor:pointer;
+      display:flex; align-items:center;
+      gap:8px;
+      font-size:14px;
+    }
+    input[type="radio"] { transform: scale(1.05); }
+    .controls { display:flex; gap:10px; margin-top:12px; }
+    button { padding:10px 14px; border-radius:8px; border:0; cursor:pointer; font-weight:700; color:#fff; }
+    .btn-go { background: linear-gradient(90deg,#2bb673,#1f8c58); }
+    .btn-reset { background: linear-gradient(90deg,#ff6fb1,#ff4fa8); }
+    .result { margin-top:14px; padding:12px; border-radius:8px; background:#fff; border:1px solid #eee; }
+    .result h2 { margin:0 0 8px; color:#ff4fa8; }
+    .meta { margin-top:8px; color:#666; font-size:13px; }
+    @media (max-width:600px){ .opts{flex-direction:column} }
   </style>
 </head>
 <body>
   <div class="card" role="main" aria-labelledby="title">
-    <header>
-      <h1 id="title">Minecraft Skin Finder</h1>
-      <div class="pill">Find a skin for where you play</div>
-    </header>
+    <h1 id="title">Minecraft skin quiz</h1>
+    <p class="lead">Answer 5 quick questions. No pictures. Simple result tells you what skin fits.</p>
 
-    <p class="lead">Answer five quick questions (no pictures). The quiz recommends a skin type and gives a clear description of how it looks and where it fits best.</p>
-
-    <form id="quiz" aria-describedby="help">
-      <div id="help" style="display:none">Select one option per question and press "Get my skin".</div>
-
-      <fieldset class="q">
-        <legend>1) What do you mainly do in Minecraft?</legend>
+    <form id="quiz">
+      <fieldset>
+        <legend>1) What do you do most?</legend>
         <div class="opts">
-          <label class="opt"><input type="radio" name="play" value="explore" required> Explore / survival</label>
+          <label class="opt"><input type="radio" name="play" value="explore" required> Explore / survive</label>
           <label class="opt"><input type="radio" name="play" value="build"> Build / creative</label>
-          <label class="opt"><input type="radio" name="play" value="pvp"> PvP / competitive</label>
-          <label class="opt"><input type="radio" name="play" value="role"> Roleplay / servers</label>
+          <label class="opt"><input type="radio" name="play" value="fight"> Fight / PvP</label>
+          <label class="opt"><input type="radio" name="play" value="role"> Roleplay / fun</label>
         </div>
       </fieldset>
 
-      <fieldset class="q">
-        <legend>2) Which environment do you prefer?</legend>
+      <fieldset>
+        <legend>2) Where you like to play?</legend>
         <div class="opts">
           <label class="opt"><input type="radio" name="env" value="forest" required> Forest / plains</label>
-          <label class="opt"><input type="radio" name="env" value="desert"> Desert / mesa</label>
-          <label class="opt"><input type="radio" name="env" value="snow"> Snow / mountain</label>
-          <label class="opt"><input type="radio" name="env" value="void"> Nether / End / underground</label>
+          <label class="opt"><input type="radio" name="env" value="desert"> Desert</label>
+          <label class="opt"><input type="radio" name="env" value="snow"> Snow / mountains</label>
+          <label class="opt"><input type="radio" name="env" value="nether"> Nether / end / caves</label>
         </div>
       </fieldset>
 
-      <fieldset class="q">
-        <legend>3) Do you prefer armor or casual outfits?</legend>
+      <fieldset>
+        <legend>3) Armor or chill clothes?</legend>
         <div class="opts">
-          <label class="opt"><input type="radio" name="armor" value="yes" required> Armor / tough look</label>
-          <label class="opt"><input type="radio" name="armor" value="no"> Casual / clothing</label>
+          <label class="opt"><input type="radio" name="armor" value="yes" required> Armor</label>
+          <label class="opt"><input type="radio" name="armor" value="no"> Chill clothes</label>
         </div>
       </fieldset>
 
-      <fieldset class="q">
-        <legend>4) Color style you like most?</legend>
+      <fieldset>
+        <legend>4) Pick color style</legend>
         <div class="opts">
           <label class="opt"><input type="radio" name="palette" value="bright" required> Bright / pastel</label>
-          <label class="opt"><input type="radio" name="palette" value="dark"> Dark / moody</label>
-          <label class="opt"><input type="radio" name="palette" value="natural"> Earthy / natural</label>
+          <label class="opt"><input type="radio" name="palette" value="dark"> Dark / serious</label>
+          <label class="opt"><input type="radio" name="palette" value="natural"> Earthy / green</label>
         </div>
       </fieldset>
 
-      <fieldset class="q">
-        <legend>5) What vibe do you want to give off?</legend>
+      <fieldset>
+        <legend>5) How do you want to look?</legend>
         <div class="opts">
-          <label class="opt"><input type="radio" name="vibe" value="friendly" required> Friendly / approachable</label>
-          <label class="opt"><input type="radio" name="vibe" value="intense"> Intense / imposing</label>
-          <label class="opt"><input type="radio" name="vibe" value="quirky"> Quirky / unique</label>
+          <label class="opt"><input type="radio" name="vibe" value="nice" required> Friendly</label>
+          <label class="opt"><input type="radio" name="vibe" value="tough"> Tough</label>
+          <label class="opt"><input type="radio" name="vibe" value="weird"> Weird / unique</label>
         </div>
       </fieldset>
 
       <div class="controls">
-        <button type="button" id="submit" class="btn btn-primary">Get my skin</button>
-        <button type="reset" id="reset" class="btn btn-accent">Reset</button>
+        <button type="button" id="submit" class="btn-go">Get my skin</button>
+        <button type="reset" id="reset" class="btn-reset">Reset</button>
       </div>
     </form>
 
@@ -111,122 +130,73 @@
       const resetBtn = document.getElementById('reset');
 
       const templates = {
-        ranger: {
-          name: 'Wilderness Ranger',
-          desc: 'A practical explorer skin: hood, utility belt, leather boots and muted earthy colors. Good for survival and blending into forests or plains.'
-        },
-        architect: {
-          name: 'Creative Architect',
-          desc: 'A polished builder skin with neat clothing, gloves and bright accents. Clean lines and a friendly face for creative servers and showcases.'
-        },
-        knight: {
-          name: 'Battle Knight',
-          desc: 'An armored, imposing skin with plate-like details and bold trims. Dark base tones with colored highlights to project strength in PvP.'
-        },
-        scout: {
-          name: 'Shadow Scout',
-          desc: 'A stealthy, low-profile skin using camo patterns, hood or scarf and muted colors. Ideal for sneaking, ambushes and subtle play.'
-        },
-        pastel: {
-          name: 'Pastel Pal',
-          desc: 'A cute, pastel-themed skin with soft textures and playful accessories. Bright and friendly — great for social and roleplay servers.'
-        },
-        oddity: {
-          name: 'Arcane Oddity',
-          desc: 'A quirky, fantasy skin with asymmetry, unexpected color pops and mystical accessories. Perfect to stand out in themed or roleplay servers.'
-        },
-        commander: {
-          name: 'Heroic Commander',
-          desc: 'A leader-style skin with regalia, emblem accents and confident colors. Suited for event hosts, faction leaders or anyone who wants to impress.'
-        }
+        ranger: { name: 'Ranger', text: 'Green/brown clothes, hood or cap, simple gear. Good for exploring and hiding.' },
+        builder: { name: 'Builder', text: 'Clean outfit, bright trims, gloves. Looks nice while building.' },
+        knight: { name: 'Knight', text: 'Armor look, metal details, bold colors. Good for fighting and PvP.' },
+        scout: { name: 'Scout', text: 'Dark/camo outfit, hood or scarf, sneaky look. Good for stealth.' },
+        pastel: { name: 'Pastel Pal', text: 'Soft colors, cute clothes, friendly face. Stands out and looks nice.' },
+        odd: { name: 'Odd One', text: 'Weird colors, funky details, unique look. For roleplay and standing out.' }
       };
 
-      function tally(form){
-        const score = {ranger:0,architect:0,knight:0,scout:0,pastel:0,oddity:0,commander:0};
-        const data = new FormData(form);
+      function score(form){
+        const s = { ranger:0, builder:0, knight:0, scout:0, pastel:0, odd:0 };
+        const f = new FormData(form);
 
-        // Q1 play
-        const play = data.get('play');
-        if(play === 'explore') score.ranger += 3;
-        if(play === 'build') score.architect += 3;
-        if(play === 'pvp') score.knight += 3;
-        if(play === 'role') score.oddity += 2, score.commander += 1;
+        // Q1
+        const play = f.get('play');
+        if(play === 'explore') s.ranger += 3;
+        if(play === 'build') s.builder += 3;
+        if(play === 'fight') s.knight += 3;
+        if(play === 'role') s.odd += 3;
 
-        // Q2 env
-        const env = data.get('env');
-        if(env === 'forest') score.ranger += 2;
-        if(env === 'desert') score.scout += 1;
-        if(env === 'snow') score.commander += 1;
-        if(env === 'void') score.oddity += 2;
+        // Q2
+        const env = f.get('env');
+        if(env === 'forest') s.ranger += 2;
+        if(env === 'desert') s.scout += 1;
+        if(env === 'snow') s.knight += 1;
+        if(env === 'nether') s.odd += 2;
 
-        // Q3 armor
-        const armor = data.get('armor');
-        if(armor === 'yes') score.knight += 2, score.commander += 1;
-        else score.architect += 1, score.pastel += 1;
+        // Q3
+        const armor = f.get('armor');
+        if(armor === 'yes') s.knight += 2;
+        else s.builder += 1, s.pastel += 1;
 
-        // Q4 palette
-        const palette = data.get('palette');
-        if(palette === 'bright') score.pastel += 3;
-        if(palette === 'dark') score.scout += 1, score.knight += 1;
-        if(palette === 'natural') score.ranger += 2;
+        // Q4
+        const pal = f.get('palette');
+        if(pal === 'bright') s.pastel += 2;
+        if(pal === 'dark') s.scout += 2;
+        if(pal === 'natural') s.ranger += 2;
 
-        // Q5 vibe
-        const vibe = data.get('vibe');
-        if(vibe === 'friendly') score.pastel += 2, score.architect += 1;
-        if(vibe === 'intense') score.knight += 2, score.commander += 1;
-        if(vibe === 'quirky') score.oddity += 3;
+        // Q5
+        const vibe = f.get('vibe');
+        if(vibe === 'nice') s.pastel += 2;
+        if(vibe === 'tough') s.knight += 2;
+        if(vibe === 'weird') s.odd += 2;
 
-        return score;
+        return s;
       }
 
-      function pickTop(score){
-        const arr = Object.entries(score).sort((a,b)=>b[1]-a[1]);
+      function pickTop(scores){
+        const arr = Object.entries(scores).sort((a,b)=>b[1]-a[1]);
         const topScore = arr[0][1];
-        const tied = arr.filter(([k,v])=>v === topScore).map(([k])=>k);
-        const priority = ['architect','knight','ranger','pastel','scout','oddity','commander'];
-        for(const p of priority) if(tied.includes(p)) return p;
+        const tied = arr.filter(([k,v])=>v===topScore).map(([k])=>k);
+        const order = ['builder','knight','ranger','pastel','scout','odd'];
+        for(const k of order) if(tied.includes(k)) return k;
         return arr[0][0];
       }
 
-      function buildDescription(key, formData){
-        const tmpl = templates[key] || templates.ranger;
-        let extra = '';
-        const palette = formData.get('palette');
-        const armor = formData.get('armor');
-        const env = formData.get('env');
-
-        if(palette === 'bright') extra += ' Use brighter trims and pastel highlights for a playful touch.';
-        if(palette === 'dark') extra += ' Add darker trims or metallic shading for contrast.';
-        if(palette === 'natural') extra += ' Earthy greens and browns will make it feel grounded.';
-        if(armor === 'yes') extra += ' Consider armor overlays or plating details for authenticity.';
-        if(env === 'void') extra += ' Use unusual or ethereal details to match the environment.';
-
-        return `<h2>${escapeHtml(tmpl.name)}</h2><p>${escapeHtml(tmpl.desc)} ${escapeHtml(extra)}</p><p class="meta"><strong>Best for:</strong> ${escapeHtml(recommendWhere(key))}</p>`;
+      function makeOutput(key){
+        const t = templates[key] || templates.ranger;
+        return `<h2>${t.name}</h2><p>${t.text}</p><p class="meta">Short and simple pick. Change answers and try again.</p>`;
       }
-
-      function recommendWhere(key){
-        switch(key){
-          case 'ranger': return 'Survival and exploration servers';
-          case 'architect': return 'Creative/building servers and showcases';
-          case 'knight': return 'PvP arenas, faction servers';
-          case 'scout': return 'Stealth play and ambushes';
-          case 'pastel': return 'Social and roleplay servers';
-          case 'oddity': return 'Roleplay or themed events';
-          case 'commander': return 'Events, leadership roles';
-          default: return 'General use';
-        }
-      }
-
-      function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
       submit.addEventListener('click', ()=>{
         if(!quiz.reportValidity()) return;
-        const values = new FormData(quiz);
-        const score = tally(quiz);
-        const key = pickTop(score);
-        out.innerHTML = buildDescription(key, values);
+        const scores = score(quiz);
+        const pick = pickTop(scores);
+        out.innerHTML = makeOutput(pick);
         out.hidden = false;
-        out.scrollIntoView({behavior:'smooth', block:'center'});
+        out.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
 
       resetBtn.addEventListener('click', ()=>{
